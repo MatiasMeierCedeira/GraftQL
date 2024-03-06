@@ -17,7 +17,14 @@ jobs:
       uses: actions/checkout@v3
       with:
          fetch-depth: 0
-
+         
+    - name: Git Semantic Version
+      uses: PaulHatch/semantic-version@v4.0.3
+      with : 
+         major_pattern: "(Major:)"
+         minor_pattern: "(feature:)"
+         format: "${major}.${minor}.${patch}-prerelease${increment}"
+         
     - name: Docker login
       env:
         DOCKER_USER: ${{ secrets.DOCKERHUB_USER }} 
@@ -27,13 +34,13 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
         echo "finalizando login"
         
-    - name: Build Docker Image
-      run: |
-        docker build -t drmeier/graftql:0.0.2 .
+  #  - name: Build Docker Image
+  #    run: |
+  #      docker build -t drmeier/graftql:0.0.2 .
         
-    - name: Push Docker Image
-      run: |
-        docker push drmeier/graftql:0.0.2
+  #  - name: Push Docker Image
+  #    run: |
+  #      docker push drmeier/graftql:0.0.2
     
         
   #- name: Build the Docker image
