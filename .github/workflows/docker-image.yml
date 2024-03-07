@@ -41,8 +41,7 @@ jobs:
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
       run: |
-        docker build -t drmeier/graftql$NEW_VERSION .
-        
+        docker build -t drmeier/graftql:$NEW_VERSION .
     - name: Push Docker Image
       env:
         NEW_VERSION: ${{ steps.version.outputs.version }}
